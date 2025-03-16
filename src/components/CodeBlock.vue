@@ -135,9 +135,9 @@ const copyIcon = computed(() => {
   margin: 1rem 0;
   border-radius: 8px;
   overflow: hidden;
-  background-color: var(--md-code-bg, #1e1e1e);
+  background-color: var(--md-code-bg);
   transition: all 0.3s ease;
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--border-color);
 }
 
 .code-toolbar {
@@ -145,13 +145,13 @@ const copyIcon = computed(() => {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background-color: var(--toolbar-bg);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .language-tag {
   font-size: 0.85rem;
-  color: #888;
+  color: var(--toolbar-text);
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   text-transform: capitalize;
 }
@@ -164,7 +164,7 @@ const copyIcon = computed(() => {
 .toolbar-button {
   background: none;
   border: none;
-  color: #888;
+  color: var(--toolbar-text);
   padding: 4px 8px;
   cursor: pointer;
   border-radius: 4px;
@@ -172,11 +172,13 @@ const copyIcon = computed(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .toolbar-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: var(--toolbar-hover-bg);
+  color: var(--toolbar-hover-text);
 }
 
 .icon {
@@ -217,11 +219,16 @@ code {
 /* 暗色主题适配 */
 :root.dark .code-block {
   background-color: #161b22;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 :root.dark .code-toolbar {
   background-color: rgba(255, 255, 255, 0.05);
   border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+:root.dark .language-tag {
+  color: #888;
 }
 
 :root.dark .toolbar-button {
@@ -231,6 +238,10 @@ code {
 :root.dark .toolbar-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
+}
+
+:root.dark .toolbar-button::after {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* 工具栏动画 */
@@ -246,7 +257,7 @@ code {
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: width 0.3s, height 0.3s;
@@ -258,29 +269,4 @@ code {
   opacity: 0;
 }
 
-/* 代码高亮增强 */
-:deep(.hljs-keyword),
-:deep(.hljs-title.function_) {
-  color: #ff79c6;
-}
-
-:deep(.hljs-string) {
-  color: #f1fa8c;
-}
-
-:deep(.hljs-number) {
-  color: #bd93f9;
-}
-
-:deep(.hljs-comment) {
-  color: #6272a4;
-}
-
-:deep(.hljs-title.class_) {
-  color: #8be9fd;
-}
-
-:deep(.hljs-property) {
-  color: #66d9ef;
-}
 </style>

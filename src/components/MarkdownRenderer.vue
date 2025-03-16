@@ -69,8 +69,8 @@ watchEffect(() => {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   
   /* 亮色主题 */
-  color: #0366d6;
-  background-color: rgba(3, 102, 214, 0.1);
+  color: #0550ae;
+  background-color: #f6f8fa;
   
   /* 过渡效果 */
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -84,15 +84,15 @@ watchEffect(() => {
 
 /* 代码高亮额外样式 */
 .markdown-body .hljs-keyword {
-  color: #d73a49;
+  color: #3281e0;
 }
 
 .markdown-body .hljs-string {
-  color: #032f62;
+  color: #ee7474;
 }
 
 .markdown-body .hljs-comment {
-  color: #6a737d;
+  color: #6a9955;
 }
 
 .dark .markdown-body .hljs-keyword {

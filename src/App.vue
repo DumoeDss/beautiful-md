@@ -242,8 +242,12 @@ function formatLanguage(lang: string): string {
   --bg-color: #ffffff;
   --text-color: #24292e;
   --border-color: #e5e7eb;
-  --header-bg: #1a1a1a;
-  --md-code-bg: #1e1e1e;
+  --header-bg: #f3f4f6;
+  --md-code-bg: #414141;
+  --toolbar-text: #cadbf1;
+  --toolbar-bg: #504f4f;
+  --toolbar-hover-bg: #e5e7eb;
+  --toolbar-hover-text: #111827;
 }
 
 :root.dark {
@@ -252,6 +256,10 @@ function formatLanguage(lang: string): string {
   --border-color: #30363d;
   --header-bg: #161b22;
   --md-code-bg: #161b22;
+  --toolbar-text: #aaa;
+  --toolbar-bg: rgba(255, 255, 255, 0.05);
+  --toolbar-hover-bg: rgba(255, 255, 255, 0.1);
+  --toolbar-hover-text: #fff;
 }
 
 body {
@@ -271,10 +279,10 @@ body {
 
 .app-header {
   background-color: var(--header-bg);
-  color: white;
+  color: var(--text-color);
   padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header-content {
@@ -293,7 +301,7 @@ body {
 .theme-toggle {
   background: none;
   border: none;
-  color: white;
+  color: var(--text-color);
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -307,7 +315,7 @@ body {
 }
 
 .theme-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--toolbar-hover-bg);
 }
 
 .app-content {
@@ -349,13 +357,13 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--toolbar-bg);
   border-bottom: 1px solid var(--border-color);
 }
 
 .language-tag {
   font-size: 0.85rem;
-  color: #888;
+  color: var(--toolbar-text);
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   text-transform: capitalize;
 }
@@ -368,7 +376,7 @@ body {
 .toolbar-button {
   background: none;
   border: none;
-  color: #888;
+  color: var(--toolbar-text);
   padding: 4px 8px;
   cursor: pointer;
   border-radius: 4px;
@@ -390,8 +398,8 @@ body {
 }
 
 .toolbar-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: var(--toolbar-hover-bg);
+  color: var(--toolbar-hover-text);
 }
 
 /* 默认代码块样式 */
