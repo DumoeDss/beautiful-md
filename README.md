@@ -1,5 +1,7 @@
 # Beautiful-MD
 
+中文 | [English](README_EN.md)
+
 一个使用Vue 3和TypeScript开发的专业Markdown预览工具，模拟Grok的Markdown渲染效果。
 
 ## 特性
