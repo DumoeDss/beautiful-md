@@ -1,4 +1,4 @@
-# Grok-MD
+# Beautiful-MD
 
 一个使用Vue 3和TypeScript开发的专业Markdown预览工具，模拟Grok的Markdown渲染效果。
 
@@ -43,9 +43,9 @@ npm run preview
 ## 项目结构
 
 ```
-grok-md/
+beautiful-md/
 ├── public/
-│   └── grok_test.md     # 测试Markdown文件
+│   └── test.md     # 测试Markdown文件
 ├── src/
 │   ├── components/
 │   │   ├── CodeBlock.vue         # 代码块组件

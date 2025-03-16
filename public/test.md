@@ -1,90 +1,99 @@
-要设置滚动条与输入框的间距，具体来说是指滚动条与输入框内容之间的距离，可以通过调整 `#message-input` 元素的 `padding-right` 属性来实现。以下是详细的解答：
+内容没有任何意义，仅用于测试。
 
-### 为什么调整 `padding-right` 可以控制间距？
-在 CSS 中，对于带有 `overflow-y: auto` 的元素（比如 `#message-input.scrollable`），滚动条会出现在元素的 **内边距区域（padding box）** 内。当前的 CSS 中，`#message-input` 的内边距是 `padding: 20px 20px 20px 20px`，意味着右边距（`padding-right`）为 20px。这 20px 的右边距决定了内容与输入框右边缘之间的距离，而滚动条位于这个内边距内，紧靠右边缘。因此，增加 `padding-right` 会使内容向左偏移，从而增加内容与滚动条之间的空间。
+# Beautiful-MD
 
-### 如何修改代码？
-你可以在 `#message-input` 的样式中调整 `padding` 属性，具体增加右边距。例如：
+一个使用Vue 3和TypeScript开发的专业Markdown预览工具，模拟Grok的Markdown渲染效果。
+
+## 特性
+
+- ✅ 精确的Markdown渲染
+- ✅ 代码块工具栏
+  - 显示代码语言
+  - 展开/收起功能
+  - 启用/禁用自动换行
+  - 复制代码功能
+- ✅ 语法高亮支持多种编程语言
+- ✅ 行内代码特殊格式化（如CSS属性高亮）
+- ✅ 明暗主题切换
+- ✅ 完全响应式设计
+
+## 技术栈
+
+- Vue 3
+- TypeScript
+- Vite
+- Markdown-it
+- Highlight.js
+- GitHub Markdown CSS
+
+## 开发
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+
+# 预览生产版本
+npm run preview
+```
+
+## 项目结构
+
+```
+beautiful-md/
+├── public/
+│   └── test.md     # 测试Markdown文件
+├── src/
+│   ├── components/
+│   │   ├── CodeBlock.vue         # 代码块组件
+│   │   └── MarkdownRenderer.vue  # Markdown渲染器组件
+│   ├── stores/
+│   │   └── markdown.ts           # Pinia状态管理
+│   ├── App.vue                   # 主应用组件
+│   └── main.ts                   # 应用入口
+└── vite.config.ts                # Vite配置
+```
+
+## 自定义
+
+主题颜色和其他样式可以通过修改CSS变量进行自定义：
 
 ```css
-#message-input {
-  width: 100%;
-  resize: none;
-  min-height: 60px;
-  max-height: 300px;
-  border: none;
-  background-color: transparent;
-  padding: 20px 30px 20px 20px; /* 将右边距从 20px 增加到 30px */
-  color: var(--text-color);
-  font-size: var(--subtitle-size);
-  font-family: 'Noto Sans SC', Tahoma, Arial, sans-serif;
-  transition: height var(--transition-normal), color var(--transition-normal);
-  line-height: 1.6;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin-bottom: 50px;
-  letter-spacing: 0.01em;
-  text-align: left;
-  margin-top: 20px;
+:root {
+  --primary-color: #3b82f6;
+  --bg-color: #ffffff;
+  --text-color: #24292e;
+  --border-color: #e5e7eb;
+  --header-bg: #1a1a1a;
+  --md-code-bg: #1e1e1e;
+}
+
+:root.dark {
+  --bg-color: #0d1117;
+  --text-color: #c9d1d9;
+  --border-color: #30363d;
+  --header-bg: #161b22;
+  --md-code-bg: #161b22;
 }
 ```
 
-- **修改前**：`padding: 20px 20px 20px 20px`（上下左右均为 20px）。
-- **修改后**：`padding: 20px 30px 20px 20px`（右边距增加到 30px）。
-- **效果**：内容与滚动条之间的间距会从默认的 20px 增加到 30px。
+## 扩展
 
-如果你想要更大的间距，可以进一步调整，例如设置为 `40px` 或更多，具体取决于你的设计需求。
+未来可能的扩展功能：
 
-### 注意事项
-1. **空聊天状态的输入框**  
-   在 `.empty-chat-container #message-input` 中，内边距是 `padding: 0px 20px 20px 20px`，右边距也是 20px。如果在这种状态下也需要调整间距，应同步修改：
-   ```css
-   .empty-chat-container #message-input {
-     padding: 0px 30px 20px 20px; /* 右边距增加到 30px */
-     margin-top: 20px;
-   }
-   ```
+- 实时编辑功能
+- 导出为PDF或HTML
+- 更多主题选项
+- 插件系统
 
-2. **滚动条预留空间**  
-   当前 CSS 使用了 `scrollbar-gutter: stable;`，这会为滚动条预留空间，避免内容在滚动条出现或消失时发生布局偏移。调整 `padding-right` 不会影响这个预留空间，而是直接影响内容与滚动条之间的可视间距。
-
-3. **浏览器兼容性**  
-   - `scrollbar-width: thin` 和 `scrollbar-color` 只在 Firefox 等支持这些属性的浏览器中生效。
-   - 在 WebKit 浏览器（如 Chrome、Safari）中，滚动条的外观可能需要额外的自定义样式（见下文）。
-
-### 高级选项：自定义滚动条样式
-如果单纯调整内边距不够，或者你想让滚动条本身在输入框边缘内缩（而不是紧靠右边缘），可以在 WebKit 浏览器中使用 `::-webkit-scrollbar` 伪元素。例如：
-
-```css
-#message-input.scrollable {
-  overflow-y: auto;
-  scrollbar-gutter: stable;
-  box-sizing: border-box;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(59, 130, 246, 0.25) transparent;
-}
-
-#message-input::-webkit-scrollbar {
-  width: 12px; /* 设置滚动条宽度 */
-}
-
-#message-input::-webkit-scrollbar-track {
-  background: transparent; /* 轨道透明 */
-}
-
-#message-input::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.25); /* 滚动条滑块颜色 */
-  border: 2px solid transparent; /* 在滑块周围添加透明边框，制造间距 */
-  border-radius: 6px;
-}
+```json
+{"name":"John Doe","age":30,"isStudent":false,"address":{"street":"123 Main St","city":"Anytown","state":"CA","postalCode":"12345"},"phoneNumbers":[{"type":"home","number":"555-1234"},{"type":"work","number":"555-5678"}],"email":"john.doe@example.com","skills":["JavaScript","Python","SQL","React"],"experience":[{"company":"Tech Corp","position":"Software Engineer","startDate":"2018-06-01","endDate":"2021-05-31","responsibilities":["Developed web applications","Optimized database queries","Collaborated with cross-functional teams"]},{"company":"Innovate LLC","position":"Senior Developer","startDate":"2021-06-01","endDate":"2023-10-31","responsibilities":["Led a team of 5 developers","Implemented CI/CD pipelines","Designed scalable microservices architecture"]}],"education":{"degree":"Bachelor of Science","major":"Computer Science","university":"State University","graduationYear":2018},"certifications":["AWS Certified Developer","Scrum Master Certified"],"languages":["English","Spanish"],"hobbies":["reading","hiking","coding"]}
 ```
-
-- **效果**：`border: 2px solid transparent` 会在滚动条滑块周围添加 2px 的透明边框，使滑块看起来与轨道边缘有间距。
-- **局限性**：这种方法只影响滚动条滑块的外观，且仅适用于 WebKit 浏览器（如 Chrome 和 Safari）。
-
-### 总结
-最简单直接的方法是调整 `#message-input` 的 `padding-right` 属性，例如将 `padding` 从 `20px 20px 20px 20px` 改为 `20px 30px 20px 20px`，以增加内容与滚动条之间的间距。如果需要更精细的控制，可以结合 `::-webkit-scrollbar` 伪元素进行自定义，但这取决于你的浏览器支持需求和设计目标。建议尝试不同的 `padding-right` 值（比如 30px、40px），观察实际效果，直到满意为止。
-
 
 如果调整 `padding-right` 后滚动条仍然始终贴着右边，没有产生预期的间距效果，可能是由于以下几个原因之一导致的。我们可以逐步排查并提供解决方案：
 
@@ -237,97 +246,3 @@
     <textarea id="message-input" ...></textarea>
   </div>
   ```
-
-希望这些方法能帮你解决问题！如果还有疑问，请告诉我具体效果或错误现象，我会继续协助。
-
-
-# Grok-MD
-
-一个使用Vue 3和TypeScript开发的专业Markdown预览工具，模拟Grok的Markdown渲染效果。
-
-## 特性
-
-- ✅ 精确的Markdown渲染
-- ✅ 代码块工具栏
-  - 显示代码语言
-  - 展开/收起功能
-  - 启用/禁用自动换行
-  - 复制代码功能
-- ✅ 语法高亮支持多种编程语言
-- ✅ 行内代码特殊格式化（如CSS属性高亮）
-- ✅ 明暗主题切换
-- ✅ 完全响应式设计
-
-## 技术栈
-
-- Vue 3
-- TypeScript
-- Vite
-- Markdown-it
-- Highlight.js
-- GitHub Markdown CSS
-
-## 开发
-
-```bash
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-
-# 构建生产版本
-npm run build
-
-# 预览生产版本
-npm run preview
-```
-
-## 项目结构
-
-```
-grok-md/
-├── public/
-│   └── grok_test.md     # 测试Markdown文件
-├── src/
-│   ├── components/
-│   │   ├── CodeBlock.vue         # 代码块组件
-│   │   └── MarkdownRenderer.vue  # Markdown渲染器组件
-│   ├── stores/
-│   │   └── markdown.ts           # Pinia状态管理
-│   ├── App.vue                   # 主应用组件
-│   └── main.ts                   # 应用入口
-└── vite.config.ts                # Vite配置
-```
-
-## 自定义
-
-主题颜色和其他样式可以通过修改CSS变量进行自定义：
-
-```css
-:root {
-  --primary-color: #3b82f6;
-  --bg-color: #ffffff;
-  --text-color: #24292e;
-  --border-color: #e5e7eb;
-  --header-bg: #1a1a1a;
-  --md-code-bg: #1e1e1e;
-}
-
-:root.dark {
-  --bg-color: #0d1117;
-  --text-color: #c9d1d9;
-  --border-color: #30363d;
-  --header-bg: #161b22;
-  --md-code-bg: #161b22;
-}
-```
-
-## 扩展
-
-未来可能的扩展功能：
-
-- 实时编辑功能
-- 导出为PDF或HTML
-- 更多主题选项
-- 插件系统
